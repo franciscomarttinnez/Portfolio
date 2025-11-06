@@ -1,8 +1,8 @@
-import { defineConfig } from 'astro/config';
-import tailwind from '@astrojs/tailwind';
+import { defineConfig } from "astro/config";
+import tailwind from "@astrojs/tailwind";
 
 export default defineConfig({
   integrations: [tailwind()],
-  output: 'static',
-  base: '/Portfolio/', // 👈 debe coincidir con el nombre del repositorio
+  output: "static",
+  base: "/Portfolio/", // 👈 igual al nombre exacto del repo
 });
