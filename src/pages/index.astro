@@ -9,57 +9,94 @@ const B = import.meta.env.BASE_URL; // base para rutas en GitHub Pages
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>Francisco Martínez | Desarrollador Web Fullstack</title>
 
-    <!-- SEO -->
+    <!-- SEO básico -->
     <meta name="description" content="Portfolio de Francisco Martínez, desarrollador web fullstack. Proyectos, habilidades, certificaciones y contacto." />
     <meta name="robots" content="index,follow" />
     <meta property="og:title" content="Francisco Martínez | Desarrollador Web Fullstack" />
     <meta property="og:description" content="Proyectos, habilidades, certificaciones y contacto." />
     <meta property="og:type" content="website" />
+    <!-- Puedes usar una URL absoluta luego. Por ahora funciona con BASE_URL -->
     <meta property="og:image" content={`${B}images/og.jpg`} />
     <link rel="icon" href={`${B}favicon.png`} />
 
     <style>
-      html{scroll-behavior:smooth}
+      html { scroll-behavior: smooth; }
+
+      /* ===== Scroll reveal ===== */
       .fade-up{opacity:0;transform:translateY(60px);transition:opacity 1s ease,transform 1s ease}
       .fade-up.visible{opacity:1;transform:translateY(0)}
       .fade-delay-1{transition-delay:.2s}.fade-delay-2{transition-delay:.4s}.fade-delay-3{transition-delay:.6s}
+
+      /* ===== Tipografía ===== */
       h1,h2,h3{font-weight:800;letter-spacing:-0.02em}
       p,.small-copy{font-weight:600;line-height:1.7}
       .subtle{opacity:.95}
+
+      /* ===== Header ===== */
       header{backdrop-filter:blur(8px)}
       nav{flex-wrap:wrap}
       .nav-link{transition:all .25s ease;white-space:nowrap}
       .nav-link:hover{transform:scale(1.15);color:#fff}
       section{scroll-margin-top:84px}
       .nav-link.active{color:#fff;text-decoration:underline;text-underline-offset:6px}
-      .glow-btn{position:relative;overflow:hidden;border-radius:14px;background:#0a0a0a;color:#fff;font-weight:700;font-size:1.05rem;padding:.9rem 2.4rem;transition:transform .3s ease,box-shadow .3s ease,border .3s ease;z-index:0;border:2px solid transparent;display:inline-flex;align-items:center;gap:.6rem}
-      .glow-btn::before{content:"";position:absolute;top:50%;left:50%;width:200%;height:200%;transform:translate(-50%,-50%);background:radial-gradient(circle at var(--x,50%) var(--y,50%), rgba(132,0,255,.7), rgba(0,140,255,.73), transparent 150%);border-radius:inherit;opacity:0;transition:opacity .3s ease;pointer-events:none}
+
+      /* ===== Botones base ===== */
+      .glow-btn{
+        position:relative;overflow:hidden;border-radius:14px;background:#0a0a0a;color:#fff;
+        font-weight:700;font-size:1.05rem;padding:.9rem 2.4rem;transition:transform .3s ease,box-shadow .3s ease,border .3s ease;
+        z-index:0;border:2px solid transparent;display:inline-flex;align-items:center;gap:.6rem
+      }
+      .glow-btn::before{
+        content:"";position:absolute;top:50%;left:50%;width:200%;height:200%;transform:translate(-50%,-50%);
+        background:radial-gradient(circle at var(--x,50%) var(--y,50%), rgba(132,0,255,.7), rgba(0,140,255,.73), transparent 150%);
+        border-radius:inherit;opacity:0;transition:opacity .3s ease;pointer-events:none
+      }
       .glow-btn:hover::before{opacity:1}
       .glow-btn:hover{transform:scale(1.08);border-color:#fff;box-shadow:0 0 20px 4px rgba(255,255,255,.35)}
+
+      /* ===== Hero name ===== */
       .hero-name{transition:all .4s ease;text-shadow:0 0 0 transparent;user-select:none;cursor:default}
       .hero-name:hover{transform:scale(1.1);text-shadow:0 0 12px rgba(83,45,252,.7),0 0 24px rgba(117,45,252,.7),0 0 48px rgba(132,0,255,.7)}
+
+      /* ===== Cards/medios ===== */
       .card{background:rgba(0,0,0,.40);backdrop-filter:blur(10px);border-radius:1.25rem;box-shadow:0 10px 40px rgba(0,0,0,.25)}
+
+      /* Avatar cuadrado redondeado */
       .avatar{width:12rem;height:12rem;border-radius:1rem;overflow:hidden;margin-inline:auto}
       .avatar img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
       .avatar:hover img{transform:scale(1.08)}
+
+      /* Badges y stats */
       .pill{display:inline-block;padding:.35rem .7rem;border-radius:999px;background:rgba(255,255,255,.12);backdrop-filter:blur(6px);font-weight:700;font-size:.85rem}
       .stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.9rem;width:100%}
       .stat{border-radius:.9rem;border:1px solid rgba(255,255,255,.12);padding:.85rem .9rem;text-align:center}
       .stat h4{font-weight:800;font-size:1.25rem;margin:0}
       .stat p{margin:.25rem 0 0;font-size:.85rem;opacity:.85}
+
+      /* Íconos tecnologías */
       .tech-icon{width:52px;height:52px;filter:brightness(0) invert(1);transition:transform .25s ease,filter .25s ease}
       .tech-icon:hover{transform:scale(1.2);filter:brightness(0) invert(1) drop-shadow(0 0 10px #60a5fa)}
+
+      /* Matriz de habilidades con barras */
       .skills-grid{width:100%;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
       .meter{background:rgba(255,255,255,.12);border-radius:.75rem;padding:.65rem .8rem}
       .meter label{display:flex;justify-content:space-between;font-size:.95rem;margin-bottom:.35rem}
       .bar{height:.6rem;border-radius:.5rem;background:rgba(255,255,255,.18);overflow:hidden}
       .fill{width:0;height:100%;background:linear-gradient(90deg,#60a5fa,#a78bfa);border-radius:.5rem;transition:width 1.1s ease}
       .visible .fill{width:var(--val,70%)}
+
+      /* Certificados */
       .cert-img{border-radius:.75rem;transition:transform .35s ease,box-shadow .35s ease}
       .cert-img:hover{transform:scale(1.03);box-shadow:0 10px 30px rgba(0,0,0,.45)}
+
+      /* Contacto */
       .contact-icon{width:40px;height:40px;filter:brightness(0) invert(1);transition:transform .25s ease,filter .25s ease}
       .contact-icon:hover{transform:scale(1.25);filter:brightness(0) invert(1) drop-shadow(0 0 8px #5900ff)}
+
+      /* ===== Fondo: partículas ===== */
       #particles-bg{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-2;pointer-events:none}
+
+      /* ===== Fondo: imágenes flotantes ===== */
       .float-layer{position:fixed; inset:0; z-index:-1; pointer-events:none; overflow:hidden}
       .float{position:absolute; will-change:transform, opacity; opacity:.55; filter: drop-shadow(0 10px 18px rgba(0,0,0,.35))}
       .f1{ width:18vmin; top:12%; left:8%;  animation:floatA 26s ease-in-out infinite }
@@ -71,64 +108,46 @@ const B = import.meta.env.BASE_URL; // base para rutas en GitHub Pages
       .low-vfx .float-layer{display:none}
       @media (prefers-reduced-motion: reduce){.float{animation:none}}
 
-      .theme-light .glow-btn{ background:#111; color:#fff }
-      .theme-light .card{ background:rgba(255,255,255,.80); color:#111; box-shadow:0 4px 20px rgba(0,0,0,.15) }
-      .theme-light .nav-link:hover{ color:#111 }
-      .theme-light .hero-name{ color:#111 }
-      .theme-light .meter{ background:rgba(0,0,0,.06) }
-      .theme-light .bar{ background:rgba(0,0,0,.12) }
-      .theme-light .tech-icon,
-      .theme-light .contact-icon {
-        filter: drop-shadow(0 0 4px rgba(0,0,0,0.4)) brightness(0.1) saturate(150%);
-      }
+      /* ===== Light theme helpers ===== */
+	.theme-light .glow-btn{ background:#111; color:#fff }
+	.theme-light .card{ background:rgba(255,255,255,.80); color:#111; box-shadow:0 4px 20px rgba(0,0,0,.15) }
+	.theme-light .nav-link:hover{ color:#111 }
+	.theme-light .hero-name{ color:#111 }
+	.theme-light .meter{ background:rgba(0,0,0,.06) }
+	.theme-light .bar{ background:rgba(0,0,0,.12) }
+
+	/* Mejora de visibilidad de íconos en modo claro */
+	.theme-light .tech-icon,
+	.theme-light .contact-icon {
+  	filter: drop-shadow(0 0 4px rgba(0,0,0,0.4)) brightness(0.1) saturate(150%);
+  	transition: filter 0.3s ease, transform 0.3s ease;
+	}
+
+	.theme-light .tech-icon:hover,
+	.theme-light .contact-icon:hover {
+ 	 transform: scale(1.2);
+ 	 filter: drop-shadow(0 0 8px rgba(90,90,90,0.5)) brightness(0.4);
+	}
+
 
       /* ===== Controles flotantes ===== */
-      .controls-stack{
-        position:fixed;
-        right:1rem;
-        top:1rem;
-        z-index:50;
-        display:flex;
-        flex-direction:column;
-        gap:.6rem;
-        pointer-events:none
-      }
-      .controls-stack>*{pointer-events:auto}
-      .mini-btn{padding:.55rem .9rem;font-size:.9rem;border-radius:12px}
-      .mini-icon{width:18px;height:18px;display:inline-block}
+      .controls-stack{position:fixed; right:1rem; top:1rem; z-index:50; display:flex; flex-direction:column; gap:.6rem; pointer-events:none}
+      .controls-stack > *{ pointer-events:auto }
+      .mini-btn{ padding:.55rem .9rem; font-size:.9rem; border-radius:12px }
+      .mini-icon{ width:18px; height:18px; display:inline-block }
 
-      /* ===== Responsive mejorado ===== */
-      @media (max-width:1024px){
-        nav{gap:1rem;flex-wrap:wrap}
-        h1{font-size:4rem} h2{font-size:1.5rem}
-      }
-
+      /* ===== Responsive ===== */
+      @media (max-width:1024px){nav{gap:1rem} h1{font-size:4rem} h2{font-size:1.5rem}}
       @media (max-width:768px){
-        nav{flex-wrap:wrap;justify-content:center;gap:.6rem;padding:0.75rem;font-size:.95rem}
-        .controls-stack{
-          right:.5rem;top:.5rem;gap:.4rem;
-          flex-direction:row;flex-wrap:wrap;justify-content:flex-end;
-        }
-        .glow-btn.mini-btn{padding:.45rem .8rem;font-size:.8rem}
-        h1{font-size:2.8rem} h2{font-size:1.2rem}
-        p{font-size:1rem}
+        nav{flex-wrap:wrap;justify-content:center;gap:.8rem}
+        h1{font-size:2.8rem} h2{font-size:1.3rem} p{font-size:1rem}
         .avatar{width:9.5rem;height:9.5rem}
         .skills-grid{grid-template-columns:1fr}
       }
-
       @media (max-width:480px){
-        nav{flex-direction:column;align-items:center;gap:.5rem}
-        .controls-stack{
-          position:fixed;
-          bottom:.75rem;right:.75rem;top:auto;
-          flex-direction:row;justify-content:center;
-          width:calc(100% - 1.5rem)
-        }
-        .glow-btn.mini-btn{flex:1;text-align:center;font-size:.75rem;padding:.4rem .6rem}
         h1{font-size:2.2rem} h2{font-size:1rem} p{font-size:.95rem}
         .avatar{width:8.5rem;height:8.5rem}
       }
-
       @media (prefers-reduced-motion: reduce){
         .glow-btn,.hero-name,.tech-icon,.contact-icon{transition:none!important}
       }
@@ -136,29 +155,33 @@ const B = import.meta.env.BASE_URL; // base para rutas en GitHub Pages
   </head>
 
   <body class="bg-gradient-to-b from-indigo-900 via-purple-900 to-gray-900 text-white min-h-screen">
-    <!-- Fondo -->
+    <!-- Imágenes flotantes (pon tus archivos en /public/images/floating/) -->
     <div class="float-layer" aria-hidden="true">
-      <img class="float f1" src={`${B}images/floating/github.png`} alt="" decoding="async" />
-      <img class="float f2" src={`${B}images/floating/python.png`} alt="" decoding="async" />
-      <img class="float f3" src={`${B}images/floating/html.png`} alt="" decoding="async" />
+      <img class="float f1" src={`${B}images/floating/github.png`}   alt="" decoding="async" />
+      <img class="float f2" src={`${B}images/floating/python.png`}  alt="" decoding="async" />
+      <img class="float f3" src={`${B}images/floating/html.png`}    alt="" decoding="async" />
     </div>
 
     <!-- Controles -->
     <div class="controls-stack">
       <button id="themeToggle" class="glow-btn mini-btn" aria-label="Alternar tema">
-        <span class="mini-icon" id="themeIcon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79Z"/></svg></span>
+        <span class="mini-icon" id="themeIcon">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79Z"/></svg>
+        </span>
         <span id="themeText">Tema: Dark</span>
       </button>
 
       <button id="vfxToggle" class="glow-btn mini-btn" aria-label="Alternar efectos">
-        <span class="mini-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 5.5H19l-4.4 3.2L16.4 16 12 12.8 7.6 16l1.8-5.3L5 7.5h5.2L12 2z"/></svg></span>
+        <span class="mini-icon">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 5.5H19l-4.4 3.2L16.4 16 12 12.8 7.6 16l1.8-5.3L5 7.5h5.2L12 2z"/></svg>
+        </span>
         <span id="vfxText">VFX: ON</span>
       </button>
     </div>
 
     <!-- Header -->
     <header class="fixed top-0 left-0 w-full z-40">
-      <nav class="max-w-5xl mx-auto flex justify-center items-center p-4 gap-8 text-lg font-medium">
+      <nav class="max-w-5xl mx-auto flex justify-center items-center p-4 gap-8 text-lg font-medium" aria-label="Principal">
         <a href="#inicio" class="nav-link">Inicio</a>
         <a href="#sobre-mi" class="nav-link">Sobre mí</a>
         <a href="#habilidades" class="nav-link">Habilidades</a>
@@ -168,19 +191,262 @@ const B = import.meta.env.BASE_URL; // base para rutas en GitHub Pages
     </header>
 
     <!-- Hero -->
-    <section id="inicio" class="min-h-screen flex flex-col items-center justify-center text-center px-6 fade-up">
-      <h1 class="hero-name text-5xl md:text-7xl font-extrabold mb-4 fade-up fade-delay-1">&lt;Francisco&nbsp;Martínez&gt;</h1>
+    <section id="inicio" class="min-h-screen flex flex-col items-center justify-center text-center px-6 fade-up" aria-label="Inicio">
+      <h1 class="hero-name text-5xl md:text-7xl font-extrabold mb-4 fade-up fade-delay-1">
+        &lt;Francisco&nbsp;Martínez&gt;
+      </h1>
       <h2 class="text-2xl md:text-3xl mb-6 fade-up fade-delay-2">Desarrollador Fullstack</h2>
-      <p class="max-w-xl subtle mb-8 fade-up fade-delay-3">Desarrollo aplicaciones web modernas con foco en performance, accesibilidad y una UI limpia.</p>
+      <p class="max-w-xl subtle mb-8 fade-up fade-delay-3">
+        Desarrollo aplicaciones web modernas con foco en performance, accesibilidad y una UI limpia.
+        Trabajo en frontend y backend, integrando buenas prácticas, control de versiones y despliegue.
+      </p>
       <div class="flex flex-col sm:flex-row gap-4 fade-up fade-delay-3">
-        <a href={`${B}cv-francisco.pdf`} download class="glow-btn">Descargar CV</a>
+        <a href={`${B}cv-francisco.pdf`} download class="glow-btn" aria-label="Descargar CV en PDF">Descargar CV</a>
         <a href="#contacto" class="glow-btn">Contactar</a>
       </div>
     </section>
 
-    <!-- Secciones omitidas (sobre mí, habilidades, certificaciones, contacto) idénticas a tu versión anterior -->
-    <!-- ... -->
+    <!-- Sobre mí -->
+    <section id="sobre-mi" class="min-h-screen flex flex-col items-center justify-center px-6 fade-up" aria-label="Sobre mí">
+      <div class="card flex flex-col items-center p-8 max-w-3xl text-center gap-6">
+        <div class="avatar">
+          <img src={`${B}icons/fotodeperfil.png`} loading="lazy" alt="Foto de perfil" />
+        </div>
+        <h2 class="text-4xl">Sobre mí</h2>
 
-    <footer class="py-6 text-center text-sm text-gray-400">© 2025 Francisco Martínez — Desarrollador Web Fullstack</footer>
+        <p class="max-w-2xl">
+Soy estudiante de la Tecnicatura Universitaria en Programación en la UTN Facultad Regional Resistencia Chaco, con fecha estimada de finalización en 2028. Me gradué de la UEGP N48 Luis Federico Leloir, donde adquirí una sólida base en Ciencias Naturales. 
+
+Mi experiencia incluye el desarrollo full stack, con habilidades en JavaScript, C++ y desarrollo web tanto backend como frontend. Estas competencias me motivan a seguir creciendo en el ámbito de la programación y la tecnología, contribuyendo a proyectos innovadores y desafiantes.
+        </p>
+
+        <div class="flex flex-wrap justify-center gap-2">
+          <span class="pill">Fullstack</span>
+          <span class="pill">APIs y autenticación</span>
+          <span class="pill">Responsive</span>
+          <span class="pill">Diseño limpio</span>
+          <span class="pill">GitHub</span>
+          <span class="pill">Python</span>
+        </div>
+
+        <div class="stats">
+          <div class="stat"><h4>1 año</h4><p>En el desarrollo</p></div>
+          <div class="stat"><h4>+5</h4><p>Stacks usados</p></div>
+          <div class="stat"><h4>3</h4><p>Idiomas fluidos</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Habilidades -->
+    <section id="habilidades" class="min-h-screen flex flex-col items-center justify-center px-6 fade-up" aria-label="Habilidades">
+      <div class="card flex flex-col items-center p-8 max-w-4xl text-center gap-8">
+        <div class="max-w-2xl">
+          <h2 class="text-4xl mb-4">Habilidades</h2>
+          <p>Base sólida en web moderna. Componentes reutilizables, comunicación con servicios, pruebas básicas y despliegue.</p>
+        </div>
+
+        <div class="skills-grid">
+          <div class="meter" style="--val: 90%;">
+            <label><span>HTML</span><span>90%</span></label>
+            <div class="bar"><div class="fill"></div></div>
+          </div>
+          <div class="meter" style="--val: 85%;">
+            <label><span>CSS / Tailwind</span><span>85%</span></label>
+            <div class="bar"><div class="fill"></div></div>
+          </div>
+          <div class="meter" style="--val: 80%;">
+            <label><span>JavaScript</span><span>80%</span></label>
+            <div class="bar"><div class="fill"></div></div>
+          </div>
+          <div class="meter" style="--val: 75%;">
+            <label><span>Python</span><span>75%</span></label>
+            <div class="bar"><div class="fill"></div></div>
+          </div>
+          <div class="meter" style="--val: 70%;">
+            <label><span>Django</span><span>70%</span></label>
+            <div class="bar"><div class="fill"></div></div>
+          </div>
+          <div class="meter" style="--val: 80%;">
+            <label><span>Git / GitHub</span><span>80%</span></label>
+            <div class="bar"><div class="fill"></div></div>
+          </div>
+        </div>
+
+        <div class="w-full flex flex-wrap justify-center gap-6" aria-label="Tecnologías">
+          <img src={`${B}icons/html.png`}    loading="lazy" alt="HTML"        class="tech-icon" />
+          <img src={`${B}icons/css.png`}     loading="lazy" alt="CSS"         class="tech-icon" />
+          <img src={`${B}icons/js.png`}      loading="lazy" alt="JavaScript"  class="tech-icon" />
+          <img src={`${B}icons/python.png`}  loading="lazy" alt="Python"      class="tech-icon" />
+          <img src={`${B}icons/dj.png`}      loading="lazy" alt="Django"      class="tech-icon" />
+          <img src={`${B}icons/github.png`}  loading="lazy" alt="Git / GitHub" class="tech-icon" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Certificaciones -->
+    <section id="certificaciones" class="min-h-screen flex flex-col items-center justify-center px-6 fade-up" aria-label="Certificaciones">
+      <h2 class="text-4xl font-extrabold mb-8 text-center">Certificaciones</h2>
+
+      <div class="flex flex-col gap-8 max-w-5xl">
+        <div class="card flex flex-col md:flex-row items-center p-8">
+          <a href="https://pub.coderhouse.com/legacy-certificates/690b94ef4128ab90b55db8ae" target="_blank" rel="noopener noreferrer" class="md:w-1/2 md:mr-8 mb-6 md:mb-0">
+            <img src={`${B}icons/Martinez.png`} loading="lazy" alt="Certificado Coderhouse" class="w-full cert-img" />
+          </a>
+          <div class="md:w-1/2 text-center md:text-left">
+            <h3 class="text-2xl mb-3">Diploma en Desarrollo Web</h3>
+            <p>Formación práctica en HTML, CSS y JavaScript con maquetación responsive y estructura profesional.</p>
+          </div>
+        </div>
+
+        <div class="card flex flex-col md:flex-row-reverse items-center p-8">
+          <img src={`${B}icons/Martinez.png`} loading="lazy" alt="Certificado 2" class="w-full md:w-1/2 md:ml-8 mb-6 md:mb-0 cert-img" />
+          <div class="md:w-1/2 text-center md:text-left">
+            <h3 class="text-2xl mb-3">Certificación Python Avanzado</h3>
+            <p>Backend y automatización con Python: entornos virtuales, paquetes, consumo de APIs y scripting aplicado.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contacto -->
+    <section id="contacto" class="min-h-screen flex flex-col items-center justify-center text-center px-6 fade-up" aria-label="Contacto">
+      <h2 class="text-4xl mb-4">Contacto</h2>
+      <p class="mb-6 subtle">Encontrame en:</p>
+      <div class="flex gap-8" aria-label="Redes sociales">
+        <a href="https://github.com/franciscomarttinnez/" target="_blank" rel="noopener"><img src={`${B}icons/github.png`}   alt="GitHub"   class="contact-icon" /></a>
+        <a href="https://www.linkedin.com/in/francisco-martinez-233632338" target="_blank" rel="noopener"><img src={`${B}icons/linkedin.png`} alt="LinkedIn" class="contact-icon" /></a>
+        <a href="https://www.instagram.com/franmarttinnez" target="_blank" rel="noopener"><img src={`${B}icons/instagram.png`} alt="Instagram" class="contact-icon" /></a>
+        <a href="https://wa.me/543625174899" target="_blank" rel="noopener"><img src={`${B}icons/whatsapp.png`}  alt="WhatsApp" class="contact-icon" /></a>
+      </div>
+    </section>
+
+    <footer class="py-6 text-center text-sm text-gray-400">
+      © 2025 Francisco Martínez — Desarrollador Web Fullstack
+    </footer>
+
+    <!-- Hover tracking en botones -->
+    <script>
+      document.querySelectorAll(".glow-btn").forEach((btn) => {
+        btn.addEventListener("mousemove", (e) => {
+          const r = btn.getBoundingClientRect();
+          btn.style.setProperty("--x", ((e.clientX - r.left) / r.width) * 100 + "%");
+          btn.style.setProperty("--y", ((e.clientY - r.top) / r.height) * 100 + "%");
+        });
+      });
+    </script>
+
+    <!-- Scroll reveal + activa barras -->
+    <script>
+      const observer = new IntersectionObserver((entries)=>{
+        entries.forEach((entry)=>{
+          if(entry.isIntersecting){
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },{threshold:0.15});
+      document.querySelectorAll(".fade-up").forEach((el)=>observer.observe(el));
+    </script>
+
+    <!-- Fondo: constelación optimizada -->
+    <canvas id="particles-bg"></canvas>
+    <script>
+      (() => {
+        const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const canvas = document.getElementById('particles-bg');
+        const ctx = canvas.getContext('2d', { alpha: true });
+        const DPR = Math.min(1, window.devicePixelRatio || 1);
+        const state = { points: [], grid: new Map(), w: 0, h: 0, last: 0, low: false };
+
+        function setSize(){ state.w=canvas.width=Math.floor(innerWidth*DPR); state.h=canvas.height=Math.floor(innerHeight*DPR); canvas.style.width=innerWidth+'px'; canvas.style.height=innerHeight+'px'; }
+        function key(ix,iy){return ix+','+iy;}
+
+        function rebuild(){
+          const LOW=document.body.classList.contains('low-vfx')||reduceMotion; state.low=LOW;
+          const count=LOW?Math.max(20,Math.floor((innerWidth*innerHeight)/110000)):Math.max(30,Math.floor((innerWidth*innerHeight)/85000));
+          const speed=LOW?0.06:0.12;
+          const linkBase=Math.min(110,Math.max(75,Math.hypot(innerWidth,innerHeight)*0.075))*DPR;
+          state.points=Array.from({length:count},()=>({x:Math.random()*state.w,y:Math.random()*state.h,r:(0.7+Math.random()*1.4)*DPR,dx:(Math.random()-0.5)*speed*DPR,dy:(Math.random()-0.5)*speed*DPR}));
+          state.linkDist=linkBase; state.cellSize=linkBase;
+        }
+
+        function buildGrid(){
+          state.grid.clear(); const cs=state.cellSize;
+          for(let i=0;i<state.points.length;i++){const p=state.points[i]; const ix=(p.x/cs)|0; const iy=(p.y/cs)|0; const k=key(ix,iy); if(!state.grid.has(k)) state.grid.set(k,[]); state.grid.get(k).push(i);}
+        }
+
+        function step(dt){
+          const w=state.w,h=state.h;
+          for(const p of state.points){
+            p.x+=p.dx*dt; p.y+=p.dy*dt;
+            if(p.x<-40*DPR) p.x=w+40*DPR; if(p.x>w+40*DPR) p.x=-40*DPR;
+            if(p.y<-40*DPR) p.y=h+40*DPR; if(p.y>h+40*DPR) p.y=-40*DPR;
+          }
+        }
+
+        function draw(){
+          const w=state.w,h=state.h; ctx.clearRect(0,0,w,h);
+          ctx.fillStyle='rgba(255,255,255,0.55)';
+          for(const p of state.points){ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill();}
+          ctx.lineWidth=DPR; const cs=state.cellSize, ld=state.linkDist;
+          for(const [k,idxs] of state.grid){
+            const [sx,sy]=k.split(',').map(Number);
+            for(let ox=-1;ox<=1;ox++){ for(let oy=-1;oy<=1;oy++){
+              const nb=state.grid.get(key(sx+ox,sy+oy)); if(!nb) continue;
+              for(const i of idxs){ const a=state.points[i];
+                for(const j of nb){ if(j<=i) continue; const b=state.points[j];
+                  const d=Math.hypot(a.x-b.x,a.y-b.y);
+                  if(d<ld){ const alpha=(1-d/ld)*(state.low?0.24:0.45);
+                    ctx.strokeStyle=`rgba(173,216,230,${alpha})`; ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
+                  }
+                }
+              }
+            }}
+          }
+        }
+
+        function loop(t){const ms=t-state.last; if(ms<1000/40){requestAnimationFrame(loop); return;} state.last=t; const dt=Math.min(1.6,ms/16.67); step(dt); buildGrid(); draw(); requestAnimationFrame(loop);}
+        setSize(); rebuild(); buildGrid(); requestAnimationFrame(loop);
+        addEventListener('resize',()=>{setSize(); rebuild();});
+        window.__rebuildVFX=()=>{rebuild();}
+      })();
+    </script>
+
+    <!-- Scrollspy -->
+    <script>
+      const links=[...document.querySelectorAll('nav a')];
+      const map=links.map(a=>document.querySelector(a.getAttribute('href')));
+      const spy=new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{
+          const id='#'+e.target.id;
+          const link=links.find(l=>l.getAttribute('href')===id);
+          if(e.isIntersecting){links.forEach(l=>l.classList.remove('active')); link?.classList.add('active');}
+        });
+      },{rootMargin:'-60% 0px -35% 0px',threshold:0.01});
+      map.forEach(sec=>sec&&spy.observe(sec));
+    </script>
+
+    <!-- Toggles -->
+    <script>
+      // VFX
+      const vfxBtn=document.getElementById('vfxToggle'); const vfxText=document.getElementById('vfxText');
+      vfxBtn.addEventListener('click',()=>{document.body.classList.toggle('low-vfx'); if(window.__rebuildVFX) window.__rebuildVFX(); const on=!document.body.classList.contains('low-vfx'); vfxText.textContent=on?'VFX: ON':'VFX: OFF';});
+
+      // Tema
+      const themeBtn=document.getElementById('themeToggle'); const themeIcon=document.getElementById('themeIcon'); const themeText=document.getElementById('themeText');
+      const DARK=['from-indigo-900','via-purple-900','to-gray-900','text-white']; const LIGHT=['from-indigo-100','via-purple-100','to-white','text-gray-900'];
+      function setIcon(mode){themeIcon.innerHTML=mode==='light'
+        ? '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.76 4.84 5.34 3.42 3.92 4.84 5.34 6.26 6.76 4.84zM1 13h3v-2H1v2zm10 10h2v-3h-2v3zm9.08-18.16-1.41-1.41-1.42 1.41 1.42 1.42 1.41-1.42zM20 13h3v-2h-3v2zM17.24 19.16l1.42 1.42 1.41-1.42-1.41-1.41-1.42 1.41zM12 6a6 6 0 100 12 6 6 0 000-12z"/></svg>'
+        : '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79Z"/></svg>'; }
+      function applyTheme(mode){
+        const b=document.body;
+        if(mode==='light'){DARK.forEach(c=>b.classList.remove(c)); LIGHT.forEach(c=>b.classList.add(c)); b.classList.add('theme-light'); themeText.textContent='Tema: Light';}
+        else{LIGHT.forEach(c=>b.classList.remove(c)); DARK.forEach(c=>b.classList.add(c)); b.classList.remove('theme-light'); themeText.textContent='Tema: Dark';}
+        setIcon(mode); localStorage.setItem('theme',mode);
+      }
+      const stored=localStorage.getItem('theme'); const prefersLight=matchMedia('(prefers-color-scheme: light)').matches;
+      applyTheme(stored ? stored : (prefersLight ? 'light' : 'dark'));
+      themeBtn.addEventListener('click',()=>{const current=localStorage.getItem('theme')||(prefersLight?'light':'dark'); applyTheme(current==='light'?'dark':'light');});
+    </script>
   </body>
 </html>
