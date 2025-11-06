@@ -4,5 +4,8 @@ import tailwind from "@astrojs/tailwind";
 export default defineConfig({
   integrations: [tailwind()],
   output: "static",
-  base: "/Portfolio/", // 👈 igual al nombre exacto del repo
+  base: "/Portfolio/", // coincide con tu repo
+  build: {
+    assets: "_astro",
+  },
 });
